@@ -89,35 +89,24 @@ class hashmap<K, V> implements hash<K, V> {
         }
     }
 
-    public V get(K key) {
+    public V get_1(K key) throws NoSuchElementException {
         V value;
 
         int index = get_hash(key);
         int size = array[index].size();
 
-        
-        try {
-            for (int i = 0; i < array[index].size(); i++) {
-                if (((hashmap.Node) array[index].list.get(i)).get_key() == key) {
-                    return (V) array[index].get_value(i);
-                }
+        for (int i = 0; i < array[index].size(); i++) {
+            if (((hashmap.Node) array[index].list.get(i)).get_key() == key) {
+                return (V) array[index].get_value(i);
             }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
-
-        return null;
-
+        throw new NoSuchElementException();  
     }
 
-}
-
-class elementException extends Exception {
-    public elementException(String a) {
-        super(a);
+    public V get(K key) {
+        V value;
+        value = get_1(key);
+        return value;
     }
 
-    public elementException() {
-    }
 }
